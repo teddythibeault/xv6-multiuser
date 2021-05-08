@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 	printf("\nEnter password (max 16 characters):\t");
 	scanf("%s", &(newUser->password));
 
-	printf("\nEnter full name (max 100 characters):\t");
+/*	printf("\nEnter full name (max 100 characters):\t");
 	scanf("%s", &(newUser->fullName));
 
 	printf("\nEnter department (max 50 characters):\t");
@@ -24,6 +24,6 @@ int main(int argc, char *argv[])
 
 	printf("\nEnter phone number (max 20 characters):\t");
 	scanf("%s", &(newUser->phoneNumber));
-
+*/
 	date(&(newUser->last_login));	
 }
