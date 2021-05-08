@@ -7,3 +7,5 @@ Functions added are:
 	4. passwd
 
 There is one default TTY session.
+Every user is stored in /etc/passwd with the following format:
+	username:password:home_folder
