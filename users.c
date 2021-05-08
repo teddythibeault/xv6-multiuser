@@ -1,10 +1,6 @@
-struct user get_user_from_username(char username[])
+struct user *get_user_from_line(FILE *file_pointer)
 {
 	struct user *to_return = (struct user *) malloc (sizeof(struct user));
-
-	FILE *file_pointer;
-	file_pointer = fopen("./etc/passwd", "rw");
-
 	to_return -> username = "";
 	to_return -> password = "";
 
@@ -24,7 +20,24 @@ struct user get_user_from_username(char username[])
 			strcat(to_return -> password, {next_char, '\0'});
 	}
 
+	return to_return
+}
 
+struct user get_user_from_username(char username[])
+{
+	struct user *to_return;
+	FILE *file_pointer;
+	file_pointer = fopen("./etc/passwd", "rw");
+
+	while (True)
+	{
+		to_return = get_user_from_line(file_pointer);
+
+		if (strcmp(to_return -> username, username) == 0)
+			return to_return;
+	}
+
+	return to_return;
 }
 
 int username_exists(char username[])
