@@ -24,5 +24,5 @@ int main(int argc, char *argv[])
 	printf("\nEnter phone number:\t");
 	scanf("%s", &(newUser->phoneNumber));
 
-	
+	date(&(newUser->last_login));	
 }
