@@ -4,11 +4,27 @@ struct user get_user_from_username(char username[])
 
 	FILE *file_pointer;
 	file_pointer = fopen("./etc/passwd", "rw");
+
+	to_return -> username = "";
+	to_return -> password = "";
+
 	char to_read = ' ';
 	while (to_read != ':')
 	{
-
+		next_char = fgetc(file_pointer);
+		if(to_read != ':')
+			strcat(to_return -> username, {next_char, '\0'});
 	}
+
+	to_read = ' ';
+	while (to_read != ':')
+	{
+		next_char = fgetc(file_pointer);
+		if(to_read != ':')
+			strcat(to_return -> password, {next_char, '\0'});
+	}
+
+
 }
 
 int username_exists(char username[])
