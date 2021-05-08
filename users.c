@@ -1,3 +1,5 @@
+#include "date.h"
+
 struct user *get_active_user()
 {
 	struct user *to_return = (struct user *) malloc (sizeof(struct user));
@@ -8,32 +10,21 @@ struct user *get_active_user()
 	return to_return;
 }
 
-struct user *get_user_from_line(FILE *file_pointer)
-{
-	struct user *to_return = (struct user *) malloc (sizeof(struct user));
-	to_return -> username = "";
-	to_return -> password = "";
-
-	fscanf(file_pointer, "%s:%s", to_return -> username, to_return -> password);
-
-	return to_return;
-}
-
 struct user get_user_from_username(char username[])
 {
-	struct user *to_return;
+	struct user *to_return = (struct user *) malloc (sizeof(struct user));
+	struct user *last_login = (struct rtcdate *) malloc (sizeof(struct rtcdate));
+	to_return -> username = "";
+	to_return -> password = "";
+	to_return -> home = "";
+	to_return -> last_login = last_login;
+
 	FILE *file_pointer;
-	file_pointer = fopen("./etc/passwd", "rw");
+	file_pointer = fopen("./etc/passwd", "r");
+	char buffer[100];
+	fgets(buffer, 100, file_pointer);
 
-	while (True)
-	{
-		to_return = get_user_from_line(file_pointer);
 
-		if (strcmp(to_return -> username, username) == 0)
-			return to_return;
-
-		free(to_return);
-	}
 
 	return to_return;
 }
@@ -52,6 +43,11 @@ int username_exists(char username[])
 			}
 		}
 	}
+
+	struct user *to_check = get_user_from_username(username);
+	if(strcmp(to_check -> username, "not found") == 0)
+		return 0;
+	return 1;
 }
 
 int passwords_match(char password[])
