@@ -7,7 +7,7 @@
 
 int main(int argc, char *argv[])
 {
-	struct user* newUser = malloc(sizeof(struct user));
+	struct user* newUser = (struct user*) malloc(sizeof(struct user));
 	
 	
 	printf("Creating new user.\nEnter username (max 16 characters):\t");
