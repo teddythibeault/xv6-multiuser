@@ -1,6 +1,11 @@
-char *get_active_user()
+struct user *get_active_user()
 {
+	struct user *to_return = (struct user *) malloc (sizeof(struct user));
 
+	FILE *file_pointer = fopen("./utmp", "r");
+	fscanf(file_pointer, "%s:%s", to_return -> username, to_return -> last_login);
+
+	return to_return;
 }
 
 struct user *get_user_from_line(FILE *file_pointer)
