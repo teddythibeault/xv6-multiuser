@@ -1,0 +1,9 @@
+This is a modification of the xv6 operating system with the addition of multiple users.
+
+Functions added are:
+	1. useradd [username]
+	2. usermod [username] [options]
+	3. su [username]
+	4. passwd
+
+There is one default TTY session.
