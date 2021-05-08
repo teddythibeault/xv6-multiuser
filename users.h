@@ -10,7 +10,7 @@ struct user
 //	char phoneNumber[20];
 
 	struct rtcdate last_login;
-}
+};
 
 
 struct user* get_user_from_line(FILE* file_pointer);
