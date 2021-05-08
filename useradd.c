@@ -10,19 +10,19 @@ int main(int argc, char *argv[])
 	struct user* newUser = malloc(sizeof(struct user));
 	
 	
-	printf("Creating new user.\nEnter username\t");
+	printf("Creating new user.\nEnter username (max 16 characters):\t");
 	scanf("%s", &(newUser->username));
 		
-	printf("\nEnter password:\t");
+	printf("\nEnter password (max 16 characters):\t");
 	scanf("%s", &(newUser->password));
 
-	printf("\nEnter full name:\t");
+	printf("\nEnter full name (max 100 characters):\t");
 	scanf("%s", &(newUser->fullName));
 
-	printf("\nEnter department:\t");
+	printf("\nEnter department (max 50 characters):\t");
 	scanf("%s", &(newUser->department));
 
-	printf("\nEnter phone number:\t");
+	printf("\nEnter phone number (max 20 characters):\t");
 	scanf("%s", &(newUser->phoneNumber));
 
 	date(&(newUser->last_login));	
