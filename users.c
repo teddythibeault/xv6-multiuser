@@ -1,26 +1,17 @@
+char *get_active_user()
+{
+
+}
+
 struct user *get_user_from_line(FILE *file_pointer)
 {
 	struct user *to_return = (struct user *) malloc (sizeof(struct user));
 	to_return -> username = "";
 	to_return -> password = "";
 
-	char to_read = ' ';
-	while (to_read != ':')
-	{
-		next_char = fgetc(file_pointer);
-		if(to_read != ':')
-			strcat(to_return -> username, {next_char, '\0'});
-	}
+	fscanf(file_pointer, "%s:%s", to_return -> username, to_return -> password);
 
-	to_read = ' ';
-	while (to_read != ':')
-	{
-		next_char = fgetc(file_pointer);
-		if(to_read != ':')
-			strcat(to_return -> password, {next_char, '\0'});
-	}
-
-	return to_return
+	return to_return;
 }
 
 struct user get_user_from_username(char username[])
@@ -35,6 +26,8 @@ struct user get_user_from_username(char username[])
 
 		if (strcmp(to_return -> username, username) == 0)
 			return to_return;
+
+		free(to_return);
 	}
 
 	return to_return;
