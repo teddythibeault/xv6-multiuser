@@ -1,0 +1,33 @@
+struct user get_user_from_username(char username[])
+{
+	struct user *to_return = (struct user *) malloc (sizeof(struct user));
+
+	FILE *file_pointer;
+	file_pointer = fopen("./etc/passwd", "rw");
+	char to_read = ' ';
+	while (to_read != ':')
+	{
+
+	}
+}
+
+int username_exists(char username[])
+{
+	if(strcmp(username, "root") == 0)
+	{
+		//https://stackoverflow.com/questions/9314586/c-faster-way-to-check-if-a-directory-exists
+		if (0 != access("./etc/", F_OK))
+		{
+			if (ENOENT == errno)
+			{
+				char *mkargs[] = {"mkdir", "./etc"};
+				exec("mkdir", mkargs);
+			}
+		}
+	}
+}
+
+int passwords_match(char password[])
+{
+
+}
