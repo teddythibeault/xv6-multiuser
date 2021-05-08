@@ -23,8 +23,17 @@ struct user get_user_from_username(char username[])
 	file_pointer = fopen("./etc/passwd", "r");
 	char buffer[100];
 	fgets(buffer, 100, file_pointer);
-
-
+	sscanf	(buffer, "%s:%s:%s:%d:%d:%d:%d:%d:%d",
+				to_return -> username,
+				to_return -> password,
+				to_return -> home,
+				last_login -> second,
+				last_login -> minute,
+				last_login -> hour,
+				last_login -> day,
+				last_login -> month,
+				last_login -> year
+			)
 
 	return to_return;
 }
