@@ -2,9 +2,15 @@ This is a modification of the xv6 operating system with the addition of multiple
 
 Functions added are:
 	1. useradd [username]
+		Creates a new user.
 	2. usermod [username] [options]
+		Lets user change their name.
 	3. su [username]
+		Changes user to username.
 	4. passwd
+		Sets the password for current user.
+	5. w
+		Lists current user and last login.
 
 There is one default TTY session.
 Every user is stored in /etc/passwd with the following format:
