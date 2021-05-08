@@ -1,8 +1,9 @@
 #include "date.h"
 
+
+
 struct user
 {
-	int id;
 	char username[16];
 	char password[16];
 	char department[50];
