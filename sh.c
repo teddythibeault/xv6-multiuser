@@ -3,6 +3,7 @@
 #include "types.h"
 #include "user.h"
 #include "fcntl.h"
+#include <stdio.h>
 
 // Parsed command representation
 #define EXEC  1
@@ -150,6 +151,12 @@ int main(void)
 {
 	static char buf[100];
 	int fd;
+
+	//Navigate to correct user directory, uses asprintf to create the path and then calls chdir
+	char* username = argv[0];
+	char* directory_path;
+	asprintf(&directory_path, "./%s", username);
+	chdir(directory_path);
 
 	// Ensure that three file descriptors are open.
 	while((fd = open("console", O_RDWR)) >= 0)
