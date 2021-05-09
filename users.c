@@ -1,4 +1,5 @@
 #include "date.h"
+#include<string.h>
 
 struct user *get_active_user()
 {
@@ -59,7 +60,11 @@ int username_exists(char username[])
 	return 1;
 }
 
-int passwords_match(char password[])
+int passwords_match(struct user* arg, char password[])
 {
-
+	if(strcmp(arg->password, password) == 0){
+		return 1;
+	} else{
+		return 0;
+	}
 }
