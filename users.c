@@ -11,6 +11,12 @@ struct user *get_active_user()
 	return to_return;
 }
 
+int update_active_user(struct user *to_update)
+{
+	FILE *file_pointer = fopen("./utmp", "w");
+	char to_write[50];
+}
+
 struct user get_user_from_username(char username[])
 {
 	struct user *to_return = (struct user *) malloc (sizeof(struct user));
@@ -20,21 +26,28 @@ struct user get_user_from_username(char username[])
 	to_return -> home = "";
 	to_return -> last_login = last_login;
 
-	FILE *file_pointer;
-	file_pointer = fopen("./etc/passwd", "r");
-	char buffer[100];
-	fgets(buffer, 100, file_pointer);
-	sscanf	(buffer, "%s:%s:%s:%d:%d:%d:%d:%d:%d",
-				to_return -> username,
-				to_return -> password,
-				to_return -> home,
-				last_login -> second,
-				last_login -> minute,
-				last_login -> hour,
-				last_login -> day,
-				last_login -> month,
-				last_login -> year
-			)
+	int found = 0;
+	while(found == 0)
+	{
+		FILE *file_pointer;
+		file_pointer = fopen("./etc/passwd", "r");
+		char buffer[100];
+		fgets(buffer, 100, file_pointer);
+		sscanf	(buffer, "%s:%s:%s:%d:%d:%d:%d:%d:%d",
+					to_return -> username,
+					to_return -> password,
+					to_return -> home,
+					last_login -> second,
+					last_login -> minute,
+					last_login -> hour,
+					last_login -> day,
+					last_login -> month,
+					last_login -> year
+				)
+
+		if(strcmp(to_return -> username, username) == 0)
+			found = 1;
+	}
 
 	return to_return;
 }

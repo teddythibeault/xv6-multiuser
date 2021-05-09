@@ -31,6 +31,11 @@ int main(void)
 	{
 		printf(1, "login: ");
 		scanf("%s", &username);
+		if(username_exists)
+		{
+			printf(1, "\npassword: ");
+			scanf("%s", &password);
+		}
 	}
 */
 	for(;;)

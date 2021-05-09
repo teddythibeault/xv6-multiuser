@@ -12,9 +12,6 @@ struct user
 	struct rtcdate last_login;
 };
 
-
-struct user* get_user_from_line(FILE* file_pointer);
-
 struct user get_user_from_username(char username[]);
 
 int username_exists(char username[]);
