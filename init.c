@@ -5,7 +5,7 @@
 #include "user.h"
 #include "fcntl.h"
 #include "users.h"
-#include <unistd.h>
+//#include <unistd.h>
 #include <string.h>
 #include<stdlib.h>
 
@@ -51,14 +51,14 @@ int main(void)
 
 		if(pid == 0)
 		{
-		
+
 			for(;;){
 				printf(1, "Username:\t");
 				scanf("%s", &username);
-				
+
 				printf(1, "Password:\t");
 				scanf("%s", &password);
-			
+
 				if(username_exists(username)){
 					if(passwords_match(password, get_user_from_username(username)->password)){
 						exec("sh", &username); //execute shell with username as identifier for directory
@@ -71,7 +71,7 @@ int main(void)
 					printf(1, "No such user exists. Please try again\n");
 				}
 			}
-			
+
 			printf(1, "init: exec sh failed\n");
 			exit();
 
