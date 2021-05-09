@@ -38,4 +38,5 @@ void* memset(void*, int, uint);
 void* malloc(uint);
 void free(void*);
 int atoi(const char*);
-int scanf(const char *str, const char *format, ...);
+int scanf(const char *format, ...);
+int sscanf(const char *str, const char *format, ...);
