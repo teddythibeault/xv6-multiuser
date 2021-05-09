@@ -12,10 +12,10 @@ struct user
 	struct rtcdate last_login;
 };
 
-struct user *get_user_from_username(char username[]);
+/*struct user *get_user_from_username(char username[]);
 
 int username_exists(char username[]);
 
 int passwords_match(struct user* arg, char password[]);
 
-char* get_active_user();
+char* get_active_user();*/

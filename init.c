@@ -2,8 +2,8 @@
 
 #include "types.h"
 #include "stat.h"
-#include "user.h"
 #include "fcntl.h"
+#include "user.h"
 #include "users.h"
 //#include <unistd.h>
 //#include <string.h>
