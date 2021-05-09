@@ -47,9 +47,30 @@ int main(void)
 
 		if(pid == 0)
 		{
-			exec("sh", argv);
+		
+			for(;;){
+				printf(1, "Username:\t");
+				scanf("%s", &username);
+				
+				printf(1, "Password:\t");
+				scanf("%s", &password);
+			
+				if(username_exists(username)){
+					if(passwords_match(password, get_user_from_username(username)->password)){
+						exec("sh", &username); //execute shell with username as identifier for directory
+						printf(1, "init: exec sh failed\n");
+						exit();
+					} else{
+						printf(1, "Incorrect password. Please try logging in again\n");
+					}
+				} else{
+					printf(1, "No such user exists. Please try again\n");
+				}
+			}
+			
 			printf(1, "init: exec sh failed\n");
 			exit();
+
 		}
 
 		while((wpid=wait()) >= 0 && wpid != pid) printf(1, "zombie!\n");
