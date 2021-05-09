@@ -17,7 +17,7 @@ int update_active_user(struct user *to_update)
 	char to_write[50];
 }
 
-struct user get_user_from_username(char username[])
+struct user *get_user_from_username(char username[])
 {
 	struct user *to_return = (struct user *) malloc (sizeof(struct user));
 	struct user *last_login = (struct rtcdate *) malloc (sizeof(struct rtcdate));
