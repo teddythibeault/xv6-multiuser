@@ -58,7 +58,7 @@ int main(void)
 				scanf("%s", &password);
 
 				if(username_exists(username)){
-					if(passwords_match(password, get_user_from_username(username)->password))
+					if(passwords_match(get_user_from_username(username), password))
 					{
 						char *argv[] = { "sh", username};
 
