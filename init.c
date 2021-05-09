@@ -9,7 +9,7 @@
 //#include <string.h>
 //#include<stdlib.h>
 
-char *argv[] = { "sh", 0 };
+char *argv[];
 
 int main(void)
 {
@@ -60,8 +60,11 @@ int main(void)
 				scanf("%s", &password);
 
 				if(username_exists(username)){
-					if(passwords_match(password, get_user_from_username(username)->password)){
-						exec("sh", &username); //execute shell with username as identifier for directory
+					if(passwords_match(password, get_user_from_username(username)->password))
+					{
+						argv = { "sh", username};
+
+						exec("sh", argv); //execute shell with username as identifier for directory
 						printf(1, "init: exec sh failed\n");
 						exit();
 					} else{
