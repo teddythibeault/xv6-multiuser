@@ -7,7 +7,7 @@
 #include "users.h"
 //#include <unistd.h>
 //#include <string.h>
-#include<stdlib.h>
+//#include<stdlib.h>
 
 char *argv[] = { "sh", 0 };
 
