@@ -24,16 +24,15 @@ int main(void)
 	dup(0);  // stderr
 
 	//login
-	int successful_login = 0;
 	char username[16];
 	char password[16];
 
-	while (successful_login != 1)
+/*	while (successful_login != 1)
 	{
 		printf(1, "login: ");
 		scanf("%s", &username);
 	}
-
+*/
 	for(;;)
 	{
 		printf(1, "init: starting sh\n");
