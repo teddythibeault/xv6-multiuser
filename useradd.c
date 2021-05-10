@@ -1,19 +1,23 @@
+
 #include "types.h"
-#include "stat.h"
-#include "date.h"
 #include "user.h"
 #include "users.h"
 
-int main(int argc, char *argv[])
-{
-	struct user* newUser = (struct user*) malloc(sizeof(struct user));
 
+int main(int argc, int argv[]){
+	
+	int i;
+	
+	if(argc < 2){
+		printf(2, "Usage: addUser <username>");
+		exit();
+	}
 
-	printf("Creating new user.\nEnter username (max 16 characters):\t");
-	scanf("%s", &(newUser->username));
+	if(addUser(argv[1]) < 0){
+		printf(2, "addUser: %s failed to create\n", argv[i]);
+		break;
+	}
 
-	printf("\nEnter password (max 16 characters):\t");
-	scanf("%s", &(newUser->password));
+	exit();
 
-	date(&(newUser->last_login));
 }
