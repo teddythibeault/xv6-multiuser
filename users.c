@@ -1,5 +1,12 @@
+#include "types.h"
 #include "date.h"
-#include<string.h>
+#include "users.h"
+#include <string.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <errno.h>
+#include <sys/stat.h>
 
 struct user *get_active_user()
 {
@@ -20,10 +27,7 @@ int update_active_user(struct user *to_update)
 struct user *get_user_from_username(char username[])
 {
 	struct user *to_return = (struct user *) malloc (sizeof(struct user));
-	struct user *last_login = (struct rtcdate *) malloc (sizeof(struct rtcdate));
-	to_return -> username = "";
-	to_return -> password = "";
-	to_return -> home = "";
+	struct rtcdate *last_login = (struct rtcdate *) malloc (sizeof(struct rtcdate));
 	to_return -> last_login = last_login;
 
 	int found = 0;
@@ -43,7 +47,7 @@ struct user *get_user_from_username(char username[])
 					last_login -> day,
 					last_login -> month,
 					last_login -> year
-				)
+				);
 
 		if(strcmp(to_return -> username, username) == 0)
 			found = 1;
@@ -61,8 +65,7 @@ int username_exists(char username[])
 		{
 			if (ENOENT == errno)
 			{
-				char *mkargs[] = {"mkdir", "./etc"};
-				exec("mkdir", mkargs);
+				mkdir("./etc", 0777);
 			}
 		}
 	}

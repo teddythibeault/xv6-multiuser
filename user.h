@@ -24,10 +24,11 @@ char* sbrk(int);
 int sleep(int);
 int uptime(void);
 int date(void);
-struct user *get_user_from_username(char username[]);
-int username_exists(char username[]);
-int passwords_match(struct user* arg, char password[]);
-char* get_active_user();
+int w(void);
+int su(const char*);
+int useradd(void);
+int usermod(const char*);
+int passwd(const char*);
 
 // ulib.c
 int stat(const char*, struct stat*);
@@ -42,6 +43,5 @@ void* memset(void*, int, uint);
 void* malloc(uint);
 void free(void*);
 int atoi(const char*);
-
 int scanf(const char *format, ...);
 int sscanf(const char *str, const char *format, ...);

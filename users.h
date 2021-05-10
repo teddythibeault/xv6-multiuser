@@ -1,5 +1,3 @@
-#include "date.h"
-
 struct user
 {
 	char username[16];
@@ -9,13 +7,10 @@ struct user
 //	char fullName[100];
 //	char phoneNumber[20];
 
-	struct rtcdate last_login;
+	struct rtcdate *last_login;
 };
 
-/*struct user *get_user_from_username(char username[]);
-
+struct user *get_user_from_username(char username[]);
 int username_exists(char username[]);
-
 int passwords_match(struct user* arg, char password[]);
-
-char* get_active_user();*/
+struct user *get_active_user();
