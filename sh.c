@@ -3,7 +3,6 @@
 #include "types.h"
 #include "user.h"
 #include "fcntl.h"
-#include <stdio.h>
 
 // Parsed command representation
 #define EXEC  1
@@ -142,7 +141,7 @@ int getcmd(char *buf, int nbuf)
 	printf(2, "[] $ ");
 	memset(buf, 0, nbuf);
 	gets(buf, nbuf);
-	if(buf[0] == 0) // EOF
+	if(buf[0] == 0)  //EOF
 		return -1;
 	return 0;
 }

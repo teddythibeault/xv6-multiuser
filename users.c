@@ -1,12 +1,8 @@
 #include "types.h"
+#include "user.h"
 #include "date.h"
 #include "users.h"
-#include <string.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <errno.h>
-#include <sys/stat.h>
+
 
 struct user *get_active_user()
 {

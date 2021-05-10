@@ -4,7 +4,7 @@
 #include "stat.h"
 #include "fcntl.h"
 #include "user.h"
-//#include "users.h"
+#include "users.h"
 //#include <unistd.h>
 //#include <string.h>
 //#include<stdlib.h>
