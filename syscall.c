@@ -141,7 +141,6 @@ static int (*syscalls[])(void) = {
 [SYS_attempt_login] sys_attempt_login,
 [SYS_su] sys_su,
 [SYS_adduser]	 sys_adduser,
-[SYS_usermod]	sys_usermod,
 [SYS_passwd]	sys_passwd
 };
 
