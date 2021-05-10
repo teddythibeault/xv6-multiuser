@@ -43,7 +43,7 @@ int main(void)
 
 			for(;;)
 			{
-				int result = -1;
+			/*	int result = -1;
 				while(result < 0)
 				{
 					printf(1, "Username:\t");
@@ -54,7 +54,7 @@ int main(void)
 
 					char *args[] = { "attempt_login", username, password};
 					result = exec("attempt_login", args);
-				}
+				}*/
 
 				exec("sh", argv);
 				printf(1, "init: exec sh failed\n");
