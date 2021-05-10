@@ -6,17 +6,8 @@ System calls added are:
 		login [username]
 		user [struct user*] [username]
 		attempt_login [username] [password]
-
-Functions added are:
-	1. useradd [username]
-		Creates a new user.
-	2. usermod [username] [options]
-		Lets user change their name.
-	3. su [username]
-		Changes user to username.
-	4. passwd
-		Sets the password for current user.
-	5. w
-		Lists current user and last login.
+		su [username] [password]
+		useradd [username]
+		passwd [password]
 
 There is one default TTY session.

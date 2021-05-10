@@ -498,7 +498,7 @@ int sys_user(void)
 	return 0;
 }
 
-int attempt_login(void)
+int sys_attempt_login(void)
 {
 	char username[16], password[16];
 
@@ -515,3 +515,20 @@ int attempt_login(void)
 	else
 		return -1;
 }
+
+int su(void)
+{
+	return 0;
+}
+
+int useradd(void)
+{
+	return 0;
+}
+
+int passwd(void)
+{
+	return 0;
+}
+
+
