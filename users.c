@@ -77,7 +77,7 @@ int login(char username[])
 //	save_user(to_update);
 
 	char dir[100];
-	strcopy(dir, "/home/");
+	strcpy(dir, "/home/");
 	strcat(dir, username);
 	chdir(dir);
 	printf(1, "Welcome!\n");
