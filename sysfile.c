@@ -445,19 +445,20 @@ sys_pipe(void)
 
 int w(void)
 {
-	char *to_return;
-	char *path = "./utmp";
-	struct inode *ip;
+	char username[16];
 
-	begin_op();
-	if(argstr(0, &to_return) < 0 || (ip = read(path, T_FILE, 0, 0)) == 0)
+	int file = open("utmp", O_RDONLY);
+	if(file < 0)
 	{
-		end_op();
-		return -1;
-	  }
-	  iunlockput(ip);
-	  end_op();
-	  return 0;
+		printf(1, "w failed to open file\n");
+		exit();
+	}
+
+	int len = strlen(username);
+	read(file, &username, len);
+	close(file);
+	if(argptr(0, (void*) &username, sizeof(*username)) < 0) return -1;
+	return 0;
 }
 
 int login(void)
@@ -470,18 +471,17 @@ int login(void)
 	else
 	{
 		printf(1, "login failed\n");
-		exit();
+		return -1;
 	}
+	int len = strlen(username);
 
-    struct test t;
-    t.name = 's';
-    t.number = 1;
-
-    int size = sizeof(t);
-    if(write(fd, &t, size) != size){
-        printf(1, "error: write to backup file failed\n");
-        exit();
+	if(write(file, &username, len) != len)
+	{
+		printf(1, "login failed\n");
+		return -1;
     }
-    printf(1, "write ok\n");
-    close(fd);
+
+    printf(1, "Welcome!\n");
+    close(file);
+    return 0;
 }
