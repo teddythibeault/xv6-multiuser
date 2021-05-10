@@ -19,17 +19,11 @@ int get_user(struct user *to_get, char username[])
 	int file = open(path, O_RDONLY);
 
 	if(file < 0)
-	{
-		printf(1, "user was not found in /users/ \n");
 		return -1;
-	}
 
 	int len = sizeof(*to_get);
 	if(read(file, to_get, len) != len)
-	{
-		printf(1, "failed to get user\n");
 		return -1;
-	}
 
 	return 0;
 }
@@ -41,18 +35,13 @@ int save_user(struct user *to_save)
 	strcat(path, to_save -> username);
 
 	int file = open(path, O_CREATE | O_RDWR);
-	if (file < 0)
-	{
-		printf(1, "Failed to open file : save_user.");
 		return -1;
-	}
+
 	int len = sizeof(*to_save);
 	int written = write(file, to_save, len);
 	if(written != len)
-	{
-		printf(1, "Failed to write file : save_user");
 		return -1;
-	}
+
 	close(file);
 	return 0;
 }
@@ -64,20 +53,19 @@ int login(char username[])
 
 
 	if(write(file, &username, len) != len)
-	{
-		printf(1, "login failed\n");
 		return -1;
-	}
 
 //	struct user *to_update;
 //	get_user(to_update, username);
 //	cmostime(to_update -> last_login);
 //	save_user(to_update);
 
+	//changes directory to users home
 	char dir[100];
 	strcpy(dir, "/home/");
 	strcat(dir, username);
 	chdir(dir);
+
 	printf(1, "Welcome!\n");
 	close(file);
 	return 0;
@@ -93,9 +81,6 @@ int attempt_login(char username[], char password[])
 		printf(1, "username not found : attempt_login : users.c\n");
 		return -1;
 	}
-
-	printf(1, "password2 testing");
-	printf(1, to_attempt.password);
 
 	if(strcmp(to_attempt.password, password) == 0)
 	{
@@ -146,9 +131,6 @@ int su(char username[])
 	last = password[strlen(password) - 1];
 	if (last == '\n' || last == '\r')
 		password[strlen(password) - 1] = '\0';
-
-	printf(1, "password testing");
-	printf(1, password);
 
 	int result = attempt_login(username, password);
 
