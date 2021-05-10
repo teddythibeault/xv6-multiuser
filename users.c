@@ -83,13 +83,20 @@ int attempt_login(char username[], char password[])
 	int found_user = get_user(&to_attempt, username);
 	if(found_user < 0)
 	{
-		printf(1, "username not found\n");
+		printf(1, "username not found : attempt_login : users.c\n");
 		return -1;
 	}
 
 	if(strcmp(to_attempt.password, password) == 0)
 	{
-		login(username);
+		int result = login(username);
+
+		if(result < 0)
+		{
+			printf(1, "unable to login : attempt_login : login : users.c");
+			return -1;
+		}
+
 		return 0;
 	}
 	else
@@ -121,7 +128,16 @@ int su(char username[])
 	char *password = malloc(16);
 	printf(1, "password: ");
 	gets(password, 16);
-	attempt_login(username, password);
+
+	int result = attempt_login(username, password);
+
+	if(result < 0)
+	{
+		printf(1, "unable to login : su : users.c.");
+		free(password);
+		return -1;
+	}
+
 	free(password);
 	return 0;
 }
