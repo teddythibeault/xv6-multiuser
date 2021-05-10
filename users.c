@@ -64,6 +64,7 @@ int login(char username[])
 	int file = open("utmp", O_CREATE | O_RDWR);
 	int len = strlen(username);
 
+
 	if(write(file, &username, len) != len)
 	{
 		printf(1, "login failed\n");
@@ -75,6 +76,10 @@ int login(char username[])
 //	cmostime(to_update -> last_login);
 //	save_user(to_update);
 
+	char dir[100];
+	strcopy(dir, "/home/");
+	strcat(dir, username);
+	chdir(dir);
 	printf(1, "Welcome!\n");
 	close(file);
 	return 0;
