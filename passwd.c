@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
 	int result = passwd();
 
-	if(passwd() < 0)
+	if(result < 0)
 	{
 		printf(2, "passwd: failed to change password");
 		exit();
