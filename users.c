@@ -93,9 +93,6 @@ int attempt_login(char username[], char password[])
 		return -1;
 	}
 
-	printf(1, "password2 testing");
-	printf(1, to_attempt.password);
-
 	if(strcmp(to_attempt.password, password) == 0)
 	{
 		int result = login(username);
@@ -145,9 +142,6 @@ int su(char username[])
 	last = password[strlen(password) - 1];
 	if (last == '\n' || last == '\r')
 		password[strlen(password) - 1] = '\0';
-
-	printf(1, "password testing");
-	printf(1, password);
 
 	int result = attempt_login(username, password);
 
