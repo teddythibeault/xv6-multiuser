@@ -9,7 +9,7 @@
 #include "types.h"
 #include "stat.h"
 #include "user.h"
-#include "users.h"
+#include "users.c"
 
 int main(int argc, char *argv[])
 {
