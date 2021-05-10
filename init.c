@@ -48,13 +48,13 @@ int main(void)
 					gets(password, 16);
 
 					char *args[] = { "attempt_login", username, password};
-					result = exec("attempt_login, args");
+					result = exec("attempt_login", args);
 				}
 
 				exec("sh", argv);
 				printf(1, "init: exec sh failed\n");
 				exit();
-
+			}
 
 			printf(1, "init: exec sh failed\n");
 			exit();

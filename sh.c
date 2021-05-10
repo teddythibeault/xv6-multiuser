@@ -152,7 +152,10 @@ int main(void)
 	int fd;
 
 	//Navigate to correct user directory, uses asprintf to create the path and then calls chdir
-	char* username = argv[0];
+	char* username = malloc(16);
+	char *argv[] = { "w", username};
+	exec("w", argv);
+
 	char* directory_path = malloc(100);
 //	asprintf(&directory_path, "./%s", username);
 	strcpy(directory_path, "./");

@@ -104,13 +104,6 @@ extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
 extern int sys_date(void);
-extern int sys_w(void);
-extern int sys_login(void);
-extern int sys_user(void);
-extern int sys_attempt_login(void);
-extern int sys_su(void);
-extern int sys_adduser(void);
-extern int sys_passwd(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -135,13 +128,6 @@ static int (*syscalls[])(void) = {
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
 [SYS_date]    sys_date,
-[SYS_w] sys_w,
-[SYS_login] sys_login,
-[SYS_user] sys_user,
-[SYS_attempt_login] sys_attempt_login,
-[SYS_su] sys_su,
-[SYS_adduser]	 sys_adduser,
-[SYS_passwd]	sys_passwd
 };
 
 void
