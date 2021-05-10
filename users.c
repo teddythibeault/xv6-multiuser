@@ -20,7 +20,6 @@ int get_user(struct user *to_get, char username[])
 
 	if(file < 0)
 	{
-		printf(1, "user was not found in /users/ \n");
 		return -1;
 	}
 
