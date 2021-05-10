@@ -12,11 +12,15 @@
 
 int get_user(struct user *to_get, char username[])
 {
-	int file = open("utmp", O_RDONLY);
+	char path[50];
+	strcpy(path, "/etc/users/");
+	strcat(path, username);
+
+	int file = open(path, O_RDONLY);
 
 	if(file < 0)
 	{
-		printf(1, "user was not found\n");
+		printf(1, "user was not found in /etc/users/ \n");
 		return -1;
 	}
 
