@@ -60,7 +60,7 @@ argptr(int n, char **pp, int size)
 {
   int i;
   struct proc *curproc = myproc();
- 
+
   if(argint(n, &i) < 0)
     return -1;
   if(size < 0 || (uint)i >= curproc->sz || (uint)i+size > curproc->sz)
@@ -104,6 +104,11 @@ extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
 extern int sys_date(void);
+extern int sys_w(void);
+extern int sys_su(void);
+extern int sys_adduser(void);
+extern int sys_usermod(void);
+extern int sys_passwd(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -128,6 +133,11 @@ static int (*syscalls[])(void) = {
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
 [SYS_date]    sys_date,
+[SYS_w] sys_w,
+[SYS_su] sys_su,
+[SYS_adduser]	 sys_adduser,
+[SYS_usermod]	sys_usermod,
+[SYS_passwd]	sys_passwd
 };
 
 void

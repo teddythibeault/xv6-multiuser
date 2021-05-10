@@ -21,3 +21,8 @@
 #define SYS_mkdir  20
 #define SYS_close  21
 #define SYS_date   22
+#define SYS_w 23
+#define SYS_su 24
+#define SYS_adduser 25
+#define SYS_usermod 26
+#define SYS_passwd 27

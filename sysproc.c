@@ -79,22 +79,46 @@ sys_sleep(void)
 
 // return how many clock tick interrupts have occurred
 // since start.
-int
-sys_uptime(void)
+int sys_uptime(void)
 {
-  uint xticks;
+	uint xticks;
 
-  acquire(&tickslock);
-  xticks = ticks;
-  release(&tickslock);
-  return xticks;
+	acquire(&tickslock);
+	xticks = ticks;
+	release(&tickslock);
+	return xticks;
 }
 
-int 
-sys_date(void){
-
+int sys_date(void)
+{
 	struct rtcdate *d;
 	if(argptr(0, (void*)&d, sizeof(*d)) < 0) return -1;
 	cmostime(d);
 	return 0;
 }
+
+int sys_w(void)
+{
+	return 0;
+}
+
+int sys_su(void)
+{
+	return 0;
+}
+
+int sys_adduser(void)
+{
+	return 0;
+}
+
+int sys_usermod(void)
+{
+	return 0;
+}
+
+int sys_passwd(void)
+{
+	return 0;
+}
+
