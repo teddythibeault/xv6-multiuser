@@ -145,7 +145,7 @@ int su(char username[])
 	if (last == '\n' || last == '\r')
 		username[strlen(username) - 1] = '\0';
 
-	char last = password[strlen(password) - 1];
+	last = password[strlen(password) - 1];
 	if (last == '\n' || last == '\r')
 		password[strlen(password) - 1] = '\0';
 
