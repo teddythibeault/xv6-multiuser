@@ -5,11 +5,7 @@
 
 int main(int argc, char *argv[])
 {
-	if(argc < 2)
-	{
-		printf(2, "Usage: passwd <password>");
-		exit();
-	}
+	int result = passwd();
 
 	if(passwd() < 0)
 	{

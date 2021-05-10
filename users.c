@@ -178,6 +178,7 @@ int passwd()
 	char *password = malloc(16);
 	struct user *to_update = (struct user*) malloc(sizeof(struct user));
 	get_user(to_update, username);
+
 	printf(1, "new password: ");
 	gets(password, 16);
 
@@ -187,7 +188,7 @@ int passwd()
 
 	strcpy(to_update -> password, password);
 	save_user(to_update);
-	printf(1, "\nupdated.");
+
 	free(username);
 	free(password);
 	return 0;
