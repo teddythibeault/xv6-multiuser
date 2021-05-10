@@ -27,7 +27,6 @@ int date(void);
 int w(void);
 int su(const char*);
 int useradd(void);
-int usermod(const char*);
 int passwd(const char*);
 
 // ulib.c
@@ -43,5 +42,3 @@ void* memset(void*, int, uint);
 void* malloc(uint);
 void free(void*);
 int atoi(const char*);
-int scanf(const char *format, ...);
-int sscanf(const char *str, const char *format, ...);

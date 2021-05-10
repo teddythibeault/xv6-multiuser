@@ -5,9 +5,10 @@
 #include "fcntl.h"
 #include "user.h"
 #include "users.h"
-//#include <unistd.h>
-//#include <string.h>
-//#include<stdlib.h>
+
+char *argv[] = { "sh", 0 };
+char username[16];
+char password[16];
 
 int main(void)
 {
@@ -21,21 +22,6 @@ int main(void)
 	dup(0);  // stdout
 	dup(0);  // stderr
 
-	//login
-	char username[16];
-	char password[16];
-
-/*	while (successful_login != 1)
-	{
-		printf(1, "login: ");
-		scanf("%s", &username);
-		if(username_exists)
-		{
-			printf(1, "\npassword: ");
-			scanf("%s", &password);
-		}
-	}
-*/
 	for(;;)
 	{
 		printf(1, "init: starting sh\n");
@@ -50,32 +36,27 @@ int main(void)
 		if(pid == 0)
 		{
 
-			for(;;){
-				printf(1, "Username:\t");
-				scanf("%s", &username);
+			for(;;)
+			{
+				int result = -1;
+				while(result < 0)
+				{
+					printf(1, "Username:\t");
+					gets(username, 16);
 
-				printf(1, "Password:\t");
-				scanf("%s", &password);
+					printf(1, "Password:\t");
+					gets(password, 16);
 
-				if(username_exists(username)){
-					if(passwords_match(get_user_from_username(username), password))
-					{
-						char *argv[] = { "sh", username};
-
-						exec("sh", argv); //execute shell with username as identifier for directory
-						printf(1, "init: exec sh failed\n");
-						exit();
-					} else{
-						printf(1, "Incorrect password. Please try logging in again\n");
-					}
-				} else{
-					printf(1, "No such user exists. Please try again\n");
+					result = attempt_login(username, password);
 				}
-			}
+
+				exec("sh", argv);
+				printf(1, "init: exec sh failed\n");
+				exit();
+
 
 			printf(1, "init: exec sh failed\n");
 			exit();
-
 		}
 
 		while((wpid=wait()) >= 0 && wpid != pid) printf(1, "zombie!\n");

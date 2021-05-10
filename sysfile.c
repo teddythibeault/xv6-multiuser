@@ -496,5 +496,22 @@ int sys_user(void)
 	if(argptr(0, (void*)&d, sizeof(*d)) < 0) return -1;
 	cmostime(d);
 	return 0;
+}
 
+int attempt_login(void)
+{
+	char username[16], password[16];
+
+	if(argptr(0, (void*) &username, sizeof(*username)) < 0) return -1;
+	if(argptr(1, (void*) &password, sizeof(*password)) < 0) return -1;
+
+	struct user to_attempt = user(username);
+
+	if(strcmp(to_attempt.password, password) == 0)
+	{
+		login(username);
+		return 0;
+	}
+	else
+		return -1;
 }
