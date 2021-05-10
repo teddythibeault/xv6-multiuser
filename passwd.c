@@ -1,20 +1,22 @@
 #include "types.h"
 #include "stat.h"
 #include "user.h"
-#include "users.h"
+#include "users.c"
 
 int main(int argc, char *argv[])
 {
-	if(argc < 2){
+	if(argc < 2)
+	{
 		printf(2, "Usage: passwd <password>");
-		exit();
-	}	
+		return -1;
+	}
 
-	if(passwd(argv[1]) < 0){
+	if(passwd() < 0)
+	{
 		printf(2, "passwd: failed to change password");
-		break;
-	} else{
-		printf(2, "Successfully changed password");
-	
-	exit();
+		return -1;
+	}
+
+	printf(2, "Successfully changed password");
+	return 0;
 }

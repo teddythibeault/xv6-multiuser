@@ -12,7 +12,7 @@
 
 int get_user(struct user *to_get, char username[])
 {
-	int file = sys_open("utmp", O_RDONLY);
+	int file = open("utmp", O_RDONLY);
 
 	if(file < 0)
 	{
@@ -66,10 +66,10 @@ int login(char username[])
 		return -1;
 	}
 
-	struct user *to_update;
-	get_user(to_update, username);
-	date(to_update -> last_login);
-	save_user(to_update);
+//	struct user *to_update;
+//	get_user(to_update, username);
+//	cmostime(to_update -> last_login);
+//	save_user(to_update);
 
 	printf(1, "Welcome!\n");
 	close(file);
@@ -80,10 +80,10 @@ int attempt_login(char username[], char password[])
 {
 	struct user to_attempt;
 
-	int found_user = user(&to_attempt, username);
+	int found_user = get_user(&to_attempt, username);
 	if(found_user < 0)
 	{
-		printf("username not found\n");
+		printf(1, "username not found\n");
 		return -1;
 	}
 
@@ -94,24 +94,23 @@ int attempt_login(char username[], char password[])
 	}
 	else
 	{
-		printf("incorrect password\n");
+		printf(1, "incorrect password\n");
 		return -1;
 	}
 }
 
-char[] w()
+char *w()
 {
-	char username[16];
+	char *username = malloc(16);
 
-	int file = sys_open("utmp", O_RDONLY);
+	int file = open("utmp", O_RDONLY);
 	if(file < 0)
 	{
 		printf(1, "w failed to open file\n");
 		exit();
 	}
 
-	int len = strlen(username);
-	read(file, &username, len);
+	read(file, &username, 16);
 	close(file);
 
 	return username;
@@ -119,35 +118,38 @@ char[] w()
 
 int su(char username[])
 {
-	char password[16];
-	printf("password: ");
-	gets(16, password);
+	char *password = malloc(16);
+	printf(1, "password: ");
+	gets(password, 16);
 	attempt_login(username, password);
+	free(password);
 	return 0;
 }
 
 int useradd(char username[])
 {
 	char home[32];
-	strcpy(home, "/home/")
+	strcpy(home, "/home/");
 	strcat(home, username);
 	struct user to_add;
-	strcpy(to_add -> username, username);
-	strcpy(to_add -> home, home);
+	strcpy(to_add.username, username);
+	strcpy(to_add.home, home);
 	save_user(&to_add);
 	return 0;
 }
 
 int passwd()
 {
-	char username[16] = w();
-	char password[16];
-	struct user *to_update;
+	char *username= w();
+	char *password = malloc(16);
+	struct user *to_update = (struct user*) malloc(sizeof(struct user));
 	get_user(to_update, username);
-	printf("new password: ");
-	gets(16, password);
+	printf(1, "new password: ");
+	gets(password, 16);
 	strcpy(to_update -> password, password);
 	save_user(to_update);
-	printf("\nupdated.");
+	printf(1, "\nupdated.");
+	free(username);
+	free(password);
 	return 0;
 }

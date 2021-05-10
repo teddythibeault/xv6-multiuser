@@ -1,5 +1,6 @@
 struct stat;
 struct rtcdate;
+struct user;
 
 // system calls
 int fork(void);
@@ -39,3 +40,14 @@ void* memset(void*, int, uint);
 void* malloc(uint);
 void free(void*);
 int atoi(const char*);
+
+//users.c
+char *w();
+int login(char username[]);
+int get_user(struct user *to_get, char username[]);
+int save_user(struct user *to_save);
+int attempt_login(char username[], char password[]);
+int su(char username[]);
+int useradd(char username[]);
+int passwd();
+

@@ -8,9 +8,9 @@
 
 #include "types.h"
 #include "user.h"
-#include "users.h"
+#include "users.c"
 
-int main(int argc, int argv[])
+int main(int argc, char *argv[])
 {
 	if(argc < 2)
 	{
@@ -18,7 +18,7 @@ int main(int argc, int argv[])
 		return -1;
 	}
 
-	if(addUser(argv[1]) < 0)
+	if(useradd(argv[1]) < 0)
 	{
 		printf(2, "addUser: failed to add %s\n", argv[1]);
 		return -1;
