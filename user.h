@@ -26,7 +26,7 @@ int uptime(void);
 int date(void);
 int w(void);
 int login(void);
-int user(void, char*);
+int user(void);
 int attempt_login(void);
 int su(const char*);
 int useradd(void);
