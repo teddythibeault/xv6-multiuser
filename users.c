@@ -140,6 +140,15 @@ int su(char username[])
 	char *password = malloc(16);
 	printf(1, "password: ");
 	gets(password, 16);
+
+	char last = username[strlen(username) - 1];
+	if (last == '\n' || last == '\r')
+		username[strlen(username) - 1] = '\0';
+
+	char last = password[strlen(password) - 1];
+	if (last == '\n' || last == '\r')
+		password[strlen(password) - 1] = '\0';
+
 	printf(1, "password testing");
 	printf(1, password);
 
@@ -158,6 +167,10 @@ int su(char username[])
 
 int useradd(char username[])
 {
+	char last = username[strlen(username) - 1];
+	if (last == '\n' || last == '\r')
+		username[strlen(username) - 1] = '\0';
+
 	char home[32];
 	strcpy(home, "/home/");
 	strcat(home, username);
@@ -176,6 +189,11 @@ int passwd()
 	get_user(to_update, username);
 	printf(1, "new password: ");
 	gets(password, 16);
+
+	char last = password[strlen(password) - 1];
+	if (last == '\n' || last == '\r')
+		password[strlen(password) - 1] = '\0';
+
 	strcpy(to_update -> password, password);
 	save_user(to_update);
 	printf(1, "\nupdated.");
