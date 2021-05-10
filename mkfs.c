@@ -64,96 +64,99 @@ xint(uint x)
   return y;
 }
 
-int
-main(int argc, char *argv[])
+int main (int argc, char *argv[])
 {
-  int i, cc, fd;
-  uint rootino, inum, off;
-  struct dirent de;
-  char buf[BSIZE];
-  struct dinode din;
+	int i, cc, fd;
+	uint rootino, inum, off;
+	struct dirent de;
+	char buf[BSIZE];
+	struct dinode din;
 
 
-  static_assert(sizeof(int) == 4, "Integers must be 4 bytes!");
+	static_assert(sizeof(int) == 4, "Integers must be 4 bytes!");
 
-  if(argc < 2){
-    fprintf(stderr, "Usage: mkfs fs.img files...\n");
-    exit(1);
-  }
+	if(argc < 2)
+	{
+		fprintf(stderr, "Usage: mkfs fs.img files...\n");
+		exit(1);
+	}
 
-  assert((BSIZE % sizeof(struct dinode)) == 0);
-  assert((BSIZE % sizeof(struct dirent)) == 0);
+	assert((BSIZE % sizeof(struct dinode)) == 0);
+	assert((BSIZE % sizeof(struct dirent)) == 0);
 
-  fsfd = open(argv[1], O_RDWR|O_CREAT|O_TRUNC, 0666);
-  if(fsfd < 0){
-    perror(argv[1]);
-    exit(1);
-  }
+	fsfd = open(argv[1], O_RDWR|O_CREAT|O_TRUNC, 0666);
 
-  // 1 fs block = 1 disk sector
-  nmeta = 2 + nlog + ninodeblocks + nbitmap;
-  nblocks = FSSIZE - nmeta;
+	if(fsfd < 0)
+	{
+		perror(argv[1]);
+		exit(1);
+	}
 
-  sb.size = xint(FSSIZE);
-  sb.nblocks = xint(nblocks);
-  sb.ninodes = xint(NINODES);
-  sb.nlog = xint(nlog);
-  sb.logstart = xint(2);
-  sb.inodestart = xint(2+nlog);
-  sb.bmapstart = xint(2+nlog+ninodeblocks);
+	// 1 fs block = 1 disk sector
+	nmeta = 2 + nlog + ninodeblocks + nbitmap;
+	nblocks = FSSIZE - nmeta;
 
-  printf("nmeta %d (boot, super, log blocks %u inode blocks %u, bitmap blocks %u) blocks %d total %d\n",
-         nmeta, nlog, ninodeblocks, nbitmap, nblocks, FSSIZE);
+	sb.size = xint(FSSIZE);
+	sb.nblocks = xint(nblocks);
+	sb.ninodes = xint(NINODES);
+	sb.nlog = xint(nlog);
+	sb.logstart = xint(2);
+	sb.inodestart = xint(2+nlog);
+	sb.bmapstart = xint(2+nlog+ninodeblocks);
 
-  freeblock = nmeta;     // the first free block that we can allocate
+	printf("nmeta %d (boot, super, log blocks %u inode blocks %u, bitmap blocks %u) blocks %d total %d\n",
+	  nmeta, nlog, ninodeblocks, nbitmap, nblocks, FSSIZE);
 
-  for(i = 0; i < FSSIZE; i++)
-    wsect(i, zeroes);
+	freeblock = nmeta;     // the first free block that we can allocate
 
-  memset(buf, 0, sizeof(buf));
-  memmove(buf, &sb, sizeof(sb));
-  wsect(1, buf);
+	for(i = 0; i < FSSIZE; i++) wsect(i, zeroes);
 
-  rootino = ialloc(T_DIR);
-  assert(rootino == ROOTINO);
+	memset(buf, 0, sizeof(buf));
+	memmove(buf, &sb, sizeof(sb));
+	wsect(1, buf);
 
-  bzero(&de, sizeof(de));
-  de.inum = xshort(rootino);
-  strcpy(de.name, ".");
-  iappend(rootino, &de, sizeof(de));
+	rootino = ialloc(T_DIR);
+	assert(rootino == ROOTINO);
 
-  bzero(&de, sizeof(de));
-  de.inum = xshort(rootino);
-  strcpy(de.name, "..");
-  iappend(rootino, &de, sizeof(de));
+	bzero(&de, sizeof(de));
+	de.inum = xshort(rootino);
+	strcpy(de.name, ".");
+	iappend(rootino, &de, sizeof(de));
 
-  for(i = 2; i < argc; i++){
-    assert(index(argv[i], '/') == 0);
+	bzero(&de, sizeof(de));
+	de.inum = xshort(rootino);
+	strcpy(de.name, "..");
+	iappend(rootino, &de, sizeof(de));
 
-    if((fd = open(argv[i], 0)) < 0){
-      perror(argv[i]);
-      exit(1);
-    }
+	for(i = 2; i < argc; i++)
+	{
+		assert(index(argv[i], '/') == 0);
 
-    // Skip leading _ in name when writing to file system.
-    // The binaries are named _rm, _cat, etc. to keep the
-    // build operating system from trying to execute them
-    // in place of system binaries like rm and cat.
-    if(argv[i][0] == '_')
-      ++argv[i];
+		if((fd = open(argv[i], 0)) < 0)
+		{
+			perror(argv[i]);
+			exit(1);
+		}
 
-    inum = ialloc(T_FILE);
+		// Skip leading _ in name when writing to file system.
+		// The binaries are named _rm, _cat, etc. to keep the
+		// build operating system from trying to execute them
+		// in place of system binaries like rm and cat.
+		if(argv[i][0] == '_')
+			++argv[i];
 
-    bzero(&de, sizeof(de));
-    de.inum = xshort(inum);
-    strncpy(de.name, argv[i], DIRSIZ);
-    iappend(rootino, &de, sizeof(de));
+		inum = ialloc(T_FILE);
 
-    while((cc = read(fd, buf, sizeof(buf))) > 0)
-      iappend(inum, buf, cc);
+		bzero(&de, sizeof(de));
+		de.inum = xshort(inum);
+		strncpy(de.name, argv[i], DIRSIZ);
+		iappend(rootino, &de, sizeof(de));
 
-    close(fd);
-  }
+		while((cc = read(fd, buf, sizeof(buf))) > 0)
+		iappend(inum, buf, cc);
+
+		close(fd);
+	}
 
   // fix size of root inode dir
   rinode(rootino, &din);

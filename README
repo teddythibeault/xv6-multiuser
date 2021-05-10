@@ -2,7 +2,7 @@ This is a modification of the xv6 operating system with the addition of multiple
 There is one default user root, with no password.
 There is one default TTY session.
 
-Upon successfully logging in with root, passwork can be set using
+Upon successfully logging in with root, password can be set using
 
 	passwd
 

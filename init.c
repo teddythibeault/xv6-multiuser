@@ -5,11 +5,12 @@
 //| Date: 10 May 2021
 //< +--------------------------------------------------------------------------------------------------+ >
 
+#include "defs.h"
 #include "types.h"
 #include "stat.h"
 #include "fcntl.h"
 #include "user.h"
-#include "users.h"
+#include "users.c"
 
 char *argv[] = { "sh", 0 };
 char username[16];
@@ -43,7 +44,15 @@ int main(void)
 
 			for(;;)
 			{
-			/*	int result = -1;
+				mkdir("/home/");
+				mkdir("/users/");
+
+				struct user *to_test = (struct user *) malloc (sizeof(struct user));
+				if(get_user(&to_test, "root") < 0)
+					useradd("root");
+				free(to_test);
+
+				int result = -1;
 				while(result < 0)
 				{
 					printf(1, "Username:\t");
@@ -52,9 +61,8 @@ int main(void)
 					printf(1, "Password:\t");
 					gets(password, 16);
 
-					char *args[] = { "attempt_login", username, password};
-					result = exec("attempt_login", args);
-				}*/
+					result = attempt_login(username, password);
+				}
 
 				exec("sh", argv);
 				printf(1, "init: exec sh failed\n");

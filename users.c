@@ -13,7 +13,7 @@
 int get_user(struct user *to_get, char username[])
 {
 	char path[50];
-	strcpy(path, "/etc/users/");
+	strcpy(path, "/users/");
 	strcat(path, username);
 
 	int file = open(path, O_RDONLY);
@@ -36,10 +36,8 @@ int get_user(struct user *to_get, char username[])
 
 int save_user(struct user *to_save)
 {
-	mkdir("/etc/");
-	mkdir("/etc/users/");
 	char path[50];
-	strcpy(path, "/etc/users/");
+	strcpy(path, "/users/");
 	strcat(path, to_save -> username);
 
 	int file = open(path, O_CREATE | O_RDWR);
