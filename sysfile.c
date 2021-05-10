@@ -374,7 +374,7 @@ sys_chdir(void)
   char *path;
   struct inode *ip;
   struct proc *curproc = myproc();
-  
+
   begin_op();
   if(argstr(0, &path) < 0 || (ip = namei(path)) == 0){
     end_op();
@@ -441,4 +441,47 @@ sys_pipe(void)
   fd[0] = fd0;
   fd[1] = fd1;
   return 0;
+}
+
+int w(void)
+{
+	char *to_return;
+	char *path = "./utmp";
+	struct inode *ip;
+
+	begin_op();
+	if(argstr(0, &to_return) < 0 || (ip = read(path, T_FILE, 0, 0)) == 0)
+	{
+		end_op();
+		return -1;
+	  }
+	  iunlockput(ip);
+	  end_op();
+	  return 0;
+}
+
+int login(void)
+{
+	char username[16];
+	if(argstr(16, &username) < 0) return -1;
+
+	int file = open("utmp", O_CREATE | O_RDWR);
+	if(file >= 0) printf(1, "login success\n");
+	else
+	{
+		printf(1, "login failed\n");
+		exit();
+	}
+
+    struct test t;
+    t.name = 's';
+    t.number = 1;
+
+    int size = sizeof(t);
+    if(write(fd, &t, size) != size){
+        printf(1, "error: write to backup file failed\n");
+        exit();
+    }
+    printf(1, "write ok\n");
+    close(fd);
 }

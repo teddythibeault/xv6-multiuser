@@ -1,24 +1,8 @@
 #include "types.h"
+#include "defs.h"
 #include "user.h"
 #include "date.h"
 #include "users.h"
-
-
-struct user *get_active_user()
-{
-	struct user *to_return = (struct user *) malloc (sizeof(struct user));
-
-	FILE *file_pointer = fopen("./utmp", "r");
-	fscanf(file_pointer, "%s:%s", to_return -> username, to_return -> last_login);
-
-	return to_return;
-}
-
-int update_active_user(struct user *to_update)
-{
-	FILE *file_pointer = fopen("./utmp", "w");
-	char to_write[50];
-}
 
 struct user *get_user_from_username(char username[])
 {
