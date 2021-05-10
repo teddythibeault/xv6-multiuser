@@ -1,12 +1,25 @@
 This is a modification of the xv6 operating system with the addition of multiple users.
-
-User functions added are:
-	w
-	login [username]
-	user [struct user*] [username]
-	attempt_login [username] [password]
-	su [username] [password]
-	useradd [username]
-	passwd [password]
-
+There is one default user root, with no password.
 There is one default TTY session.
+
+Upon successfully logging in with root, passwork can be set using
+
+	passwd
+
+passwd does not take any arguments, and sets or changes the password of the current user.
+
+The current user is stored in the file:
+
+	/utmp
+
+The current user can be obtained running the command
+
+	w
+
+Upon logging in, new users can be added with:
+
+	adduser [username]
+
+You can switch users using the su command:
+
+	su [username]
