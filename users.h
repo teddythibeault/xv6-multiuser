@@ -1,16 +1,24 @@
+//< +--------------------------------------------------------------------------------------------------+ >
+//| Project: xv6-multiuser
+//| File: users.h
+//| Description: Header for struct user and user management functions
+//| Authors: Luke Ruter, Teddy Thibeault
+//| Date: 10 May 2021
+//< +--------------------------------------------------------------------------------------------------+ >
+
 struct user
 {
 	char username[16];
 	char password[16];
 	char home[32];
-//	char department[50];
-//	char fullName[100];
-//	char phoneNumber[20];
 
-	struct rtcdate *last_login;
+//	struct rtcdate *last_login;
 };
 
-struct user *get_user_from_username(char username[]);
-int username_exists(char username[]);
-int passwords_match(struct user* arg, char password[]);
-struct user *get_active_user();
+char[] w();
+int login(char username[]);
+int get_user(struct user *to_get, char username[]);
+int attempt_login(char username[], char password[]);
+int su(char username[]);
+int useradd(char username[]);
+int passwd(char password[]);

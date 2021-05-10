@@ -1,3 +1,11 @@
+//< +--------------------------------------------------------------------------------------------------+ >
+//| Project: xv6-multiuser
+//| File: su.c
+//| Description: user-level function for switch-user
+//| Authors: Luke Ruter, Teddy Thibeault
+//| Date: 10 May 2021
+//< +--------------------------------------------------------------------------------------------------+ >
+
 #include "types.h"
 #include "stat.h"
 #include "user.h"

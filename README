@@ -1,13 +1,12 @@
 This is a modification of the xv6 operating system with the addition of multiple users.
 
-System calls added are:
-	sysfile.c
-		w
-		login [username]
-		user [struct user*] [username]
-		attempt_login [username] [password]
-		su [username] [password]
-		useradd [username]
-		passwd [password]
+User functions added are:
+	w
+	login [username]
+	user [struct user*] [username]
+	attempt_login [username] [password]
+	su [username] [password]
+	useradd [username]
+	passwd [password]
 
 There is one default TTY session.

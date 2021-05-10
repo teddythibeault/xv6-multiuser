@@ -1,4 +1,9 @@
-// Shell.
+//< +--------------------------------------------------------------------------------------------------+ >
+//| Project: xv6-multiuser
+//| File: shell.c
+//| Description: The first program in user-space. prompts for login, and starts shell
+//| Date: 10 May 2021
+//< +--------------------------------------------------------------------------------------------------+ >
 
 #include "types.h"
 #include "user.h"

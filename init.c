@@ -1,4 +1,9 @@
-// init: The initial user-level program
+//< +--------------------------------------------------------------------------------------------------+ >
+//| Project: xv6-multiuser
+//| File: init.c
+//| Description: The first program in user-space. prompts for login, and starts shell
+//| Date: 10 May 2021
+//< +--------------------------------------------------------------------------------------------------+ >
 
 #include "types.h"
 #include "stat.h"

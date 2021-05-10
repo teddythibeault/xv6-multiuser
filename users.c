@@ -1,9 +1,16 @@
+//< +--------------------------------------------------------------------------------------------------+ >
+//| Project: xv6-multiuser
+//| File: users.c
+//| Description: Provides user-level functions for user management
+//| Date: 10 May 2021
+//< +--------------------------------------------------------------------------------------------------+ >
+
 #include "types.h"
 #include "user.h"
 #include "users.h"
 #include "fcntl.h"
 
-int w(void)
+char[] w()
 {
 	char username[16];
 
@@ -17,22 +24,13 @@ int w(void)
 	int len = strlen(username);
 	read(file, &username, len);
 	close(file);
-	if(argptr(0, (void*) &username, sizeof(*username)) < 0) return -1;
-	return 0;
+
+	return username;
 }
 
-int login(void)
+int login(char username[])
 {
-	char username[16];
-	if(argstr(16, &username) < 0) return -1;
-
 	int file = open("utmp", O_CREATE | O_RDWR);
-	if(file >= 0) printf(1, "login success\n");
-	else
-	{
-		printf(1, "login failed\n");
-		return -1;
-	}
 	int len = strlen(username);
 
 	if(write(file, &username, len) != len)
@@ -46,25 +44,36 @@ int login(void)
 	return 0;
 }
 
-int user(void)
+int get_user(struct user *to_get, char username[])
 {
-	char username[16];
-	if(argptr(1, (void*) &username, sizeof(*username)) < 0) return -1;
+	int file = sys_open("utmp", O_RDONLY);
 
-	struct user *populate;
-	if(argptr(0, (void*)&d, sizeof(*d)) < 0) return -1;
-	cmostime(d);
+	if(file < 0)
+	{
+		printf(1, "user was not found\n");
+		return -1;
+	}
+
+	int len = sizeof(*to_get);
+	if(read(file, to_get, len) != len)
+	{
+		printf(1, "failed to get user\n");
+		return -1;
+	}
+
 	return 0;
 }
 
-int attempt_login(void)
+int attempt_login(char username[], char password[])
 {
-	char username[16], password[16];
+	struct user to_attempt;
 
-	if(argptr(0, (void*) &username, sizeof(*username)) < 0) return -1;
-	if(argptr(1, (void*) &password, sizeof(*password)) < 0) return -1;
-
-	struct user to_attempt = user(username);
+	int found_user = user(&to_attempt, username);
+	if(found_user < 0)
+	{
+		printf("username not found\n");
+		return -1;
+	}
 
 	if(strcmp(to_attempt.password, password) == 0)
 	{
@@ -72,12 +81,15 @@ int attempt_login(void)
 		return 0;
 	}
 	else
+	{
+		printf("incorrect password\n");
 		return -1;
+	}
 }
 
-int su(void)
+int su(char username[])
 {
-	return 0;
+
 }
 
 int useradd(void)
