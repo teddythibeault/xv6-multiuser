@@ -47,7 +47,7 @@ int main(void)
 					printf(1, "Password:\t");
 					gets(password, 16);
 
-					result = attempt_login(username, password);
+					result = attempt_login({username, password});
 				}
 
 				exec("sh", argv);
