@@ -15,6 +15,7 @@
 #include "sleeplock.h"
 #include "file.h"
 #include "fcntl.h"
+#include "users.h"
 
 // Fetch the nth word-sized system call argument as a file descriptor
 // and return both the descriptor and the corresponding struct file.
@@ -443,7 +444,7 @@ sys_pipe(void)
   return 0;
 }
 
-int w(void)
+int sys_w(void)
 {
 	char username[16];
 
@@ -461,7 +462,7 @@ int w(void)
 	return 0;
 }
 
-int login(void)
+int sys_login(void)
 {
 	char username[16];
 	if(argstr(16, &username) < 0) return -1;
@@ -484,4 +485,16 @@ int login(void)
 	printf(1, "Welcome!\n");
 	close(file);
 	return 0;
+}
+
+int sys_user(void)
+{
+	char username[16];
+	if(argptr(1, (void*) &username, sizeof(*username)) < 0) return -1;
+
+	struct user *populate;
+	if(argptr(0, (void*)&d, sizeof(*d)) < 0) return -1;
+	cmostime(d);
+	return 0;
+
 }

@@ -96,24 +96,3 @@ int sys_date(void)
 	cmostime(d);
 	return 0;
 }
-
-int sys_su(void)
-{
-	return 0;
-}
-
-int sys_adduser(void)
-{
-	return 0;
-}
-
-int sys_usermod(void)
-{
-	return 0;
-}
-
-int sys_passwd(void)
-{
-	return 0;
-}
-
