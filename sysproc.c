@@ -97,11 +97,6 @@ int sys_date(void)
 	return 0;
 }
 
-int sys_w(void)
-{
-	return 0;
-}
-
 int sys_su(void)
 {
 	return 0;

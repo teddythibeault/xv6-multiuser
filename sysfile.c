@@ -479,9 +479,9 @@ int login(void)
 	{
 		printf(1, "login failed\n");
 		return -1;
-    }
+	}
 
-    printf(1, "Welcome!\n");
-    close(file);
-    return 0;
+	printf(1, "Welcome!\n");
+	close(file);
+	return 0;
 }
