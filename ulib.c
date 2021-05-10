@@ -15,6 +15,13 @@ strcpy(char *s, const char *t)
   return os;
 }
 
+char *strcat(char *dest, const char *src)
+{
+	strcpy (dest + strlen (dest), src);
+	return dest;
+}
+
+
 int
 strcmp(const char *p, const char *q)
 {
