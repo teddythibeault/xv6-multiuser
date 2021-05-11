@@ -12,7 +12,7 @@
 #include "users.c"
 
 char *argv[] = { "sh", 0 };
-char username[16];
+char *username = (char *) malloc (16 * sizeof(char));
 char password[16];
 
 int main(void)
@@ -47,6 +47,7 @@ int main(void)
 				mkdir("/users/");
 
 				struct user *to_test = (struct user *) malloc (sizeof(struct user));
+
 				if(get_user(to_test, "root") < 0)
 					useradd("root");
 				free(to_test);
