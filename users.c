@@ -100,6 +100,11 @@ int attempt_login(char *username, char password[])
 		return -1;
 	}
 
+	printf(1, "\npassword 1\n");
+	printf(1, to_attempt.password);
+	printf(1, "\npassword 2\n");
+	printf(1, password);
+
 	if(strcmp(to_attempt.password, password) == 0)
 	{
 		int result = login(username);
