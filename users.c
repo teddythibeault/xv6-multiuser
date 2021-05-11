@@ -58,7 +58,7 @@ int save_user(struct user *to_save)
 
 int login(char username[])
 {
-	int file = open("utmp", O_CREATE | O_RDWR);
+	int file = open("/utmp", O_CREATE | O_RDWR);
 	int len = strlen(username);
 
 
@@ -68,15 +68,16 @@ int login(char username[])
 		return -1;
 	}
 
-//	struct user *to_update;
-//	get_user(to_update, username);
-//	cmostime(to_update -> last_login);
-//	save_user(to_update);
+/*	struct user *to_update;
+	get_user(to_update, username);
+	date(to_update -> last_login);
+	save_user(to_update); */
 
-	char dir[100];
+/*	char dir[100];
 	strcpy(dir, "/home/");
 	strcat(dir, username);
-	chdir(dir);
+	chdir(dir);*/
+
 	printf(1, "Welcome!\n");
 	close(file);
 	return 0;
@@ -116,7 +117,7 @@ char *w()
 {
 	char *username = (char *) malloc(16 * sizeof(char));
 
-	int file = open("utmp", O_RDONLY);
+	int file = open("/utmp", O_RDONLY);
 	if(file < 0)
 	{
 		printf(1, "w failed to open file\n");
