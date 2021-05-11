@@ -24,6 +24,8 @@ int get_user(struct user *to_get, char *username)
 		return -1;
 	}
 
+	to_get -> last_login = (struct rtcdate*) malloc(sizeof(struct rtcdate));
+
 	int len = sizeof(*to_get);
 	if(read(file, to_get, len) != len)
 	{
