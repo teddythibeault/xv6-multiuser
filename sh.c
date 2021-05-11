@@ -145,8 +145,10 @@ void runcmd(struct cmd *cmd)
 
 int getcmd(char *buf, int nbuf)
 {
-	//add username here
+	username = malloc(16 * sizeof(char));
+	w(username);
 	printf(2, "[%s] $ ", username);
+	free(username);
 	memset(buf, 0, nbuf);
 	gets(buf, nbuf);
 	if(buf[0] == 0)  //EOF
@@ -160,8 +162,6 @@ int main(int argc, char* argv[])
 	int fd;
 
 	//Navigate to correct user directory, uses asprintf to create the path and then calls chdir
-	username = malloc(16 * sizeof(char));
-	w(username);
 /*	char* directory_path = malloc(100);
 //	asprintf(&directory_path, "./%s", username);
 	strcpy(directory_path, "./");
