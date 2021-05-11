@@ -120,11 +120,16 @@ char *w()
 	int file = open("/utmp", O_RDONLY);
 	if(file < 0)
 	{
-		printf(1, "w failed to open file\n");
-		exit();
+		printf(1, "error opening utmp\n");
+		return -1;
 	}
 
-	read(file, username, 16);
+	int stat = read(file, username, 16);
+	if(stat < 0)
+	{
+		printf(1, "error reading utmp\n");
+		return -1;
+	}
 	close(file);
 
 	return username;
