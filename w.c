@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 	char *username = malloc(16 * sizeof(char));
 	w(username);
 
-	int status = get_user(arg, *username);
+	int status = get_user(arg, username);
 
 	if (status < 0)
 	{
