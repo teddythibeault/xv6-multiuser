@@ -127,7 +127,7 @@ char *w()
 		exit();
 	}
 
-	int len = sizeof(username);
+	int len = 16;
 	int stat = read(file, username, len);
 	if(stat != len)
 	{
