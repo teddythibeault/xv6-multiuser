@@ -7,6 +7,7 @@
 
 #include "types.h"
 #include "user.h"
+#include "users.c"
 #include "fcntl.h"
 
 // Parsed command representation
