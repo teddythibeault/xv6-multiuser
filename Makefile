@@ -179,6 +179,7 @@ UPROGS=\
 	_rm\
 	_sh\
 	_stressfs\
+	_date\
 	_su\
 	_useradd\
 	_usertests\
