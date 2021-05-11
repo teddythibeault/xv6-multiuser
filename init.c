@@ -55,10 +55,10 @@ int main(void)
 				int result = -1;
 				while(result < 0)
 				{
-					printf(1, "Username:\t");
+					printf(1, "Username: ");
 					gets(username, 16);
 
-					printf(1, "Password:\t");
+					printf(1, "Password: ");
 					gets(password, 16);
 
 					char last = username[strlen(username) - 1];
