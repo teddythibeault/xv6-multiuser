@@ -122,7 +122,7 @@ int w(char *username)
 	if(file < 0)
 	{
 		printf(1, "error opening utmp\n");
-		exit();
+		return -1;
 	}
 
 	int len = 16;
@@ -130,11 +130,11 @@ int w(char *username)
 	if(stat != len)
 	{
 		printf(1, "error reading utmp\n");
-		exit();
+		return -1;
 	}
 	close(file);
 
-	return username;
+	return 0;
 }
 
 int su(char username[])
