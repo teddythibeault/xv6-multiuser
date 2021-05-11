@@ -10,7 +10,7 @@
 #include "users.h"
 #include "fcntl.h"
 
-int get_user(struct user *to_get, char username[])
+int get_user(struct user *to_get, char *username)
 {
 	char path[50];
 	strcpy(path, "/users/");
@@ -175,7 +175,6 @@ int useradd(char username[])
 int passwd()
 {
 	char *username = w();
-	printf(1, *username);
 	char *password = malloc(16);
 	struct user *to_update = (struct user*) malloc(sizeof(struct user));
 	get_user(to_update, username);
