@@ -73,8 +73,7 @@ int main(void)
 					result = attempt_login(username, password);
 				}
 
-				char* username2[] = {username};
-				exec("sh", username2);
+				exec("sh", argv);
 				printf(1, "init: exec sh failed\n");
 				exit();
 			}
