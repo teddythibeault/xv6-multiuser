@@ -9,7 +9,6 @@
 #include "user.h"
 #include "users.h"
 #include "fcntl.h"
-#include "date.h"
 
 int get_user(struct user *to_get, char *username)
 {
