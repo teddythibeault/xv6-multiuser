@@ -121,14 +121,14 @@ char *w()
 	if(file < 0)
 	{
 		printf(1, "error opening utmp\n");
-		return -1;
+		exit();
 	}
 
 	int stat = read(file, username, 16);
 	if(stat < 0)
 	{
 		printf(1, "error reading utmp\n");
-		return -1;
+		exit();
 	}
 	close(file);
 
