@@ -44,15 +44,17 @@ int save_user(struct user *to_save)
 		printf(1, "Failed to open file : save_user.");
 		return -1;
 	}
+
 	int len = sizeof(*to_save);
 	int written = write(file, to_save, len);
+
 	if(written != len)
 	{
 		printf(1, "Failed to write file : save_user");
 		return -1;
 	}
-	close(file);
 
+	close(file);
 	return 0;
 }
 
@@ -60,7 +62,6 @@ int login(char *username)
 {
 	int file = open("/utmp", O_CREATE | O_RDWR);
 	int len = 16;
-
 
 	if(write(file, username, len) != len)
 	{
@@ -179,6 +180,7 @@ int useradd(char username[])
 	strcpy(to_add.username, username);
 	strcpy(to_add.home, home);
 	save_user(&to_add);
+
 	return 0;
 }
 
