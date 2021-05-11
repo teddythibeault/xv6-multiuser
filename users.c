@@ -69,10 +69,10 @@ int login(char *username)
 		return -1;
 	}
 
-/*	struct user *to_update;
+	struct user *to_update;
 	get_user(to_update, username);
 	date(to_update -> last_login);
-	save_user(to_update); */
+	save_user(to_update);
 
 /*	char dir[100];
 	strcpy(dir, "/home/");
