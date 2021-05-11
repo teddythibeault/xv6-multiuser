@@ -182,7 +182,8 @@ int useradd(char username[])
 
 int passwd()
 {
-	char *username = w();
+	char *username = malloc(16 * sizeof(char));
+	w(username);
 	char *password = (char *) malloc(16 * sizeof(char));
 	struct user *to_update = (struct user*) malloc(sizeof(struct user));
 	get_user(to_update, username);
