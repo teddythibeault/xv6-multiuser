@@ -159,18 +159,13 @@ int main(int argc, char* argv[])
 	int fd;
 
 	//Navigate to correct user directory, uses asprintf to create the path and then calls chdir
-	/*char* username = malloc(16);
-	char *argv[] = { "w", username};
-	exec("w", argv);*/
-
+	username = malloc(16 * sizeof(char));
+	w(username);
 /*	char* directory_path = malloc(100);
 //	asprintf(&directory_path, "./%s", username);
 	strcpy(directory_path, "./");
 	strcpy(directory_path + strlen(directory_path), username);
 	chdir(directory_path);*/
-
-
-	username = argv[0];
 
 	// Ensure that three file descriptors are open.
 	while((fd = open("console", O_RDWR)) >= 0)

@@ -25,6 +25,5 @@ int main(int argc, char *argv[])
 		exit();
 	}
 
-	printf(2, "Successfully changed to user %s\n", argv[1]);
 	exit();
 }
