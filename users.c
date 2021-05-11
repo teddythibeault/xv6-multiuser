@@ -123,7 +123,7 @@ char *w()
 		exit();
 	}
 
-	read(file, &username, 16);
+	read(file, username, 16);
 	close(file);
 
 	return username;
