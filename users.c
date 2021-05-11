@@ -114,7 +114,7 @@ int attempt_login(char username[], char password[])
 
 char *w()
 {
-	char *username = malloc(16);
+	char *username = (char *) malloc(16 * sizeof(char));
 
 	int file = open("utmp", O_RDONLY);
 	if(file < 0)
