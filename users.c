@@ -20,6 +20,7 @@ int get_user(struct user *to_get, char *username)
 
 	if(file < 0)
 	{
+		printf("failed to get user");
 		return -1;
 	}
 
