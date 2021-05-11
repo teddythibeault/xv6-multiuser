@@ -18,6 +18,8 @@
 
 #define MAXARGS 10
 
+char* username;
+
 struct cmd
 {
 	int type;
@@ -143,7 +145,7 @@ void runcmd(struct cmd *cmd)
 int getcmd(char *buf, int nbuf)
 {
 	//add username here
-	printf(2, "[] $ ");
+	printf(2, "[%s] $ ", username);
 	memset(buf, 0, nbuf);
 	gets(buf, nbuf);
 	if(buf[0] == 0)  //EOF
@@ -151,7 +153,7 @@ int getcmd(char *buf, int nbuf)
 	return 0;
 }
 
-int main(void)
+int main(int argc, char* argv[])
 {
 	static char buf[100];
 	int fd;
@@ -166,6 +168,9 @@ int main(void)
 	strcpy(directory_path, "./");
 	strcpy(directory_path + strlen(directory_path), username);
 	chdir(directory_path);*/
+
+
+	username = argv[0];
 
 	// Ensure that three file descriptors are open.
 	while((fd = open("console", O_RDWR)) >= 0)
