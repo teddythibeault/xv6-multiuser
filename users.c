@@ -63,7 +63,7 @@ int login(char username[])
 	int len = strlen(username);
 
 
-	if(write(file, &username, len) != len)
+	if(write(file, username, len) != len)
 	{
 		printf(1, "login failed\n");
 		return -1;
@@ -81,6 +81,7 @@ int login(char username[])
 
 	printf(1, "Welcome!\n");
 	close(file);
+
 	return 0;
 }
 
