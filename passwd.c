@@ -9,10 +9,10 @@ int main(int argc, char *argv[])
 
 	if(result < 0)
 	{
-		printf(2, "passwd: failed to change password");
+		printf(2, "passwd: failed to change password\n");
 		exit();
 	}
 
-	printf(2, "Successfully changed password");
+	printf(2, "Successfully changed password\n");
 	exit();
 }
