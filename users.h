@@ -12,7 +12,7 @@ struct user
 	char password[16];
 	char home[32];
 
-	struct rtcdate *last_login;
+//	struct rtcdate *last_login;
 };
 
 /*char *w();

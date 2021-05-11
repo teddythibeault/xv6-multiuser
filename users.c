@@ -13,42 +13,21 @@
 int get_user(struct user *to_get, char *username)
 {
 	char path[50];
-	char path2[50];
 	strcpy(path, "/users/");
 	strcat(path, username);
-	strcpy(path2, path);
-	strcat(path2, "_lastlogin");
 
-	int file = open(path2, O_RDONLY);
-	struct rtcdate *last_login = (struct rtcdate*) malloc(sizeof(struct rtcdate));
-
+	int file = open(path, O_RDONLY);
 	if(file < 0)
 	{
 		return -1;
 	}
 
-	int len = sizeof(*last_login);
-	if(read(file, last_login, len) != len)
-	{
-		printf(1, "failed to get user\n");
-		return -1;
-	}
-
-	file = open(path, O_RDONLY);
-	if(file < 0)
-	{
-		printf(1, "failed to get user");
-		return -1;
-	}
-
-	len = sizeof(*to_get);
+	int len = sizeof(*to_get);
 	if(read(file, to_get, len) != len)
 	{
 		printf(1, "failed to get user\n");
 		return -1;
 	}
-
-	to_get -> last_login = last_login;
 
 	return 0;
 }
@@ -56,35 +35,17 @@ int get_user(struct user *to_get, char *username)
 int save_user(struct user *to_save)
 {
 	char path[50];
-	char path2[50];
 	strcpy(path, "/users/");
 	strcat(path, to_save -> username);
-	strcpy(path2, path);
-	strcat(path2, "_lastlogin");
 
-	int file = open(path2, O_CREATE | O_RDWR);
+	int file = open(path, O_CREATE | O_RDWR);
 	if (file < 0)
 	{
 		printf(1, "Failed to open file : save_user.");
 		return -1;
 	}
-	int len = sizeof(*(to_save -> last_login));
-	int written = write(file, to_save -> last_login, len);
-	if(written != len)
-	{
-		printf(1, "Failed to write file : save_user");
-		return -1;
-	}
-	close(file);
-
-	file = open(path, O_CREATE | O_RDWR);
-	if (file < 0)
-	{
-		printf(1, "Failed to open file : save_user.");
-		return -1;
-	}
-	len = sizeof(*to_save);
-	written = write(file, to_save, len);
+	int len = sizeof(*to_save);
+	int written = write(file, to_save, len);
 	if(written != len)
 	{
 		printf(1, "Failed to write file : save_user");
@@ -107,13 +68,13 @@ int login(char *username)
 		return -1;
 	}
 
-	struct user *to_update = (struct user*) malloc(sizeof(struct user));
+/*	struct user *to_update = (struct user*) malloc(sizeof(struct user));
 	get_user(to_update, username);
 	to_update -> last_login = (struct rtcdate*) malloc(sizeof(struct rtcdate));
 	date(to_update -> last_login);
 	save_user(to_update);
 	free(to_update -> last_login);
-	free(to_update);
+	free(to_update); */
 
 /*	char dir[100];
 	strcpy(dir, "/home/");
