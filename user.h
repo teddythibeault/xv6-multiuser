@@ -42,7 +42,7 @@ void free(void*);
 int atoi(const char*);
 
 //users.c
-char *w();
+int w(char *username);
 int login(char username[]);
 int get_user(struct user *to_get, char username[]);
 int save_user(struct user *to_save);

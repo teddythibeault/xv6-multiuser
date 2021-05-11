@@ -60,7 +60,7 @@ int save_user(struct user *to_save)
 int login(char *username)
 {
 	int file = open("/utmp", O_CREATE | O_RDWR);
-	int len = strlen(username);
+	int len = 16;
 
 
 	if(write(file, username, len) != len)
@@ -116,27 +116,25 @@ int attempt_login(char *username, char password[])
 	}
 }
 
-char *w()
+int w(char *username)
 {
-	char *username = (char *) malloc(16 * sizeof(char));
-
 	int file = open("/utmp", O_RDONLY);
 	if(file < 0)
 	{
 		printf(1, "error opening utmp\n");
-		exit();
+		return -1;
 	}
 
-	int len = sizeof(username);
+	int len = 16;
 	int stat = read(file, username, len);
 	if(stat != len)
 	{
 		printf(1, "error reading utmp\n");
-		exit();
+		return -1;
 	}
 	close(file);
 
-	return username;
+	return 0;
 }
 
 int su(char username[])
@@ -184,7 +182,8 @@ int useradd(char username[])
 
 int passwd()
 {
-	char *username = w();
+	char *username = malloc(16 * sizeof(char));
+	w(username);
 	char *password = (char *) malloc(16 * sizeof(char));
 	struct user *to_update = (struct user*) malloc(sizeof(struct user));
 	get_user(to_update, username);
