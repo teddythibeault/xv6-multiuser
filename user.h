@@ -1,5 +1,6 @@
+#include "date.h"
+
 struct stat;
-struct rtcdate;
 struct user;
 
 // system calls

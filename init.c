@@ -8,7 +8,6 @@
 #include "types.h"
 #include "stat.h"
 #include "fcntl.h"
-#include "user.h"
 #include "users.c"
 
 char *argv[] = { "sh", 0 };

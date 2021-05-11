@@ -7,7 +7,6 @@
 //< +--------------------------------------------------------------------------------------------------+ >
 
 #include "types.h"
-#include "user.h"
 #include "users.c"
 
 int main(int argc, char *argv[])
