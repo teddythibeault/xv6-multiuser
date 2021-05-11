@@ -16,5 +16,6 @@ int main(int argc, char *argv[])
 										arg->last_login->minute, arg->last_login->second);
 
 	free(arg);
+	free(username);
 	exit();
 }
