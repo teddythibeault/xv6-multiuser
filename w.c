@@ -6,7 +6,7 @@
 
 int main(int argc, char *argv[])
 {
-	struct user* arg = (struct user*) malloc(sizeof(struct user));
+	struct user *arg = (struct user*) malloc(sizeof(struct user));
 	char *username = w();
 
 	get_user(arg, username);
