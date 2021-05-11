@@ -70,9 +70,8 @@ int login(char *username)
 	}
 
 	struct user *to_update = (struct user*) malloc(sizeof(struct user));
-	struct user *to_date = (struct rtcdate*) malloc(sizeof(struct rtcdate));
 	get_user(to_update, username);
-	to_update -> last_login = to_date;
+	to_update -> last_login = (struct rtcdate*) malloc(sizeof(struct rtcdate));
 	date(to_update -> last_login);
 	save_user(to_update);
 	free(to_date);
