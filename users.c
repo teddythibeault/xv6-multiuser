@@ -75,7 +75,7 @@ int login(char *username)
 	to_update -> last_login = (struct rtcdate*) malloc(sizeof(struct rtcdate));
 	date(to_update -> last_login);
 	save_user(to_update);
-	free(to_date);
+	free(to_update -> last_login);
 	free(to_update);
 
 /*	char dir[100];
