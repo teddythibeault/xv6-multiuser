@@ -128,7 +128,7 @@ char *w()
 	}
 
 	int len = sizeof(username);
-	int stat = read(file, username, len);
+	int stat = read(file, *username, len);
 	if(stat != len)
 	{
 		printf(1, "error reading utmp\n");
