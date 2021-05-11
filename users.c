@@ -57,13 +57,13 @@ int save_user(struct user *to_save)
 	return 0;
 }
 
-int login(char username[])
+int login(char *username)
 {
 	int file = open("/utmp", O_CREATE | O_RDWR);
 	int len = strlen(username);
 
 
-	if(write(file, &username, len) != len)
+	if(write(file, username, len) != len)
 	{
 		printf(1, "login failed\n");
 		return -1;
@@ -80,11 +80,13 @@ int login(char username[])
 	chdir(dir);*/
 
 	printf(1, "Welcome!\n");
+	free(username);
 	close(file);
+
 	return 0;
 }
 
-int attempt_login(char username[], char password[])
+int attempt_login(char *username, char password[])
 {
 	struct user to_attempt;
 
@@ -125,8 +127,9 @@ char *w()
 		exit();
 	}
 
-	int stat = read(file, username, 16);
-	if(stat < 0)
+	int len = sizeof(username);
+	int stat = read(file, username, len);
+	if(stat != len)
 	{
 		printf(1, "error reading utmp\n");
 		exit();
