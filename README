@@ -1,4 +1,8 @@
-This is a modification of the xv6 operating system with the addition of multiple users.
+This is a modification of the xv6 operating system with the addition of multiple users, made for Boston College's
+Operating Systems course in collaboration between Theodore Thibeault and Luke Ruter.
+
+For more detailed descriptions and examples of each command execution, see report.pdf.
+
 There is one default user root, with no password.
 There is one default TTY session.
 
